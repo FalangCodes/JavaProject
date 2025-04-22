@@ -1,16 +1,110 @@
 
 import java.awt.Color;
+import javax.swing.JCheckBox;
+
+
 public class GymMembershipRegistration extends javax.swing.JFrame {
+    
+    public double membershipAmount = 0;
+    public double facilityAmount =0;
+    public double groupClasses = 0;
+    
+    
+    public double MembershipPlan(){
+        
+        int selectedIndex = 0;
+        String plan = "";
+        selectedIndex = this.jMembershiplan.getSelectedIndex();
+        plan = this.jMembershiplan.getItemAt(selectedIndex);
+        double amount = 0;
+        
+        if (plan.equalsIgnoreCase("Basic plan")) {
+            
+            amount = 250;
+        }
+        else if (plan.equalsIgnoreCase("Standard plan")) {
+            
+            amount = 400;
+        }
+        else if (plan.equalsIgnoreCase("Premium plan")) {
+            
+            amount = 600;
+            
+        }      
+       
+        return amount;
+    }
+    
+    public double AddOnFacilities(JCheckBox currentCheckBox){
+        
+       boolean checked = currentCheckBox.isSelected();
+       double price = 0;
+       double facilities = 0;
+       
+        if (currentCheckBox == this.jcbSauna) {
+            price = 50;
+            }
+        else if (currentCheckBox == this.jcbPool) {
+            price = 70;
+            }
+        else if (currentCheckBox == this.jcbLocker) {
+            price = 30;   
+            }
+        else{
+            price = 0;
+            }
+        if (checked) {  
+            facilities += price;
+        }
+        else{
+            facilities -= price;
+            
+        }
+  
+        return facilities;
+    }
+    
+        public double GroupClasses(JCheckBox currentCheckBox){
+        
+       boolean checked = currentCheckBox.isSelected();
+       double price = 0;
+       double groupClass = 0;
+       
+        if (currentCheckBox == this.jcbCrossFit) {
+            price = 120;
+            }
+        else if (currentCheckBox == this.jcbYoga) {
+            price = 100;
+            }
+        else if (currentCheckBox == this.jcbZumba) {
+            price = 90;   
+            }
+        else{
+            price = 0;
+            }
+        if (checked) {  
+            groupClass += price;
+        }
+        else{
+            groupClass -= price;
+            
+        }
+  
+        return groupClass;
+    }
+    
     
     public GymMembershipRegistration() {
         initComponents();
-        
+                
         this.jMembershiplan.addItem("Please select your membership plan");
         
         this.jMembershiplan.addItem("Basic plan");
         this.jMembershiplan.addItem("Standard plan");
         this.jMembershiplan.addItem("Premium plan");
         
+        this.jcbSauna.isSelected();
+
         getContentPane().setBackground(Color.PINK);
     }
 
@@ -69,6 +163,11 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
         jMembershiplan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jMembershiplanItemStateChanged(evt);
+            }
+        });
+        jMembershiplan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMembershiplanActionPerformed(evt);
             }
         });
 
@@ -144,6 +243,11 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
         });
 
         jcbLocker.setText("Locker-R30");
+        jcbLocker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbLockerActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Add-on Facilities");
@@ -247,7 +351,7 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(815, 815, 815)
+                        .addGap(825, 825, 825)
                         .addComponent(jbtnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(1051, Short.MAX_VALUE))
         );
@@ -325,23 +429,27 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTxtTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(64, 64, 64))
+                        .addGap(1335, 1335, 1335))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(textArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jbtnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1220, 1220, 1220))
+                        .addGap(25, 25, 25)
+                        .addComponent(jbtnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbYogaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbYogaActionPerformed
+        groupClasses += GroupClasses(this.jcbYoga);
         
     }//GEN-LAST:event_jcbYogaActionPerformed
 
     private void jcbSaunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSaunaActionPerformed
         // TODO add your handling code here:
+        facilityAmount += AddOnFacilities(this.jcbSauna);
+        
+                
     }//GEN-LAST:event_jcbSaunaActionPerformed
 
     private void jrbtnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtnNoActionPerformed
@@ -388,12 +496,27 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
 
     private void jcbPoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPoolActionPerformed
         // TODO add your handling code here:
+         facilityAmount += AddOnFacilities(this.jcbPool);
+         
     }//GEN-LAST:event_jcbPoolActionPerformed
+
+    private void jMembershiplanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMembershiplanActionPerformed
+        // TODO add your handling code here:
+        this.membershipAmount = MembershipPlan();
+    }//GEN-LAST:event_jMembershiplanActionPerformed
+
+    private void jcbLockerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLockerActionPerformed
+        // TODO add your handling code here:
+        facilityAmount += AddOnFacilities(this.jcbLocker);
+
+    }//GEN-LAST:event_jcbLockerActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
