@@ -99,9 +99,9 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel9" min="-2" pref="292" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTxtTotalAmount" min="-2" pref="305" max="-2" attributes="0"/>
-                                          <Component id="jDateChooser2" min="-2" pref="305" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jTxtTotalAmount" pref="305" max="32767" attributes="0"/>
+                                          <Component id="jDateChooser1" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -204,18 +204,19 @@
                           <Component id="jrbtnDaily" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jrbtnQuarterly" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jrbtnWeek" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jrbtnWeek" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel4" min="-2" pref="37" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jDateChooser2" min="-2" pref="37" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                              <Component id="jDateChooser1" min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jTxtTotalAmount" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -223,7 +224,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="textArea2" min="-2" pref="291" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Component id="jbtnSubmit" min="-2" pref="51" max="-2" attributes="0"/>
@@ -448,7 +449,7 @@
         <Property name="text" type="java.lang.String" value="jLabel13"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
     </Component>
   </SubComponents>
 </Form>
