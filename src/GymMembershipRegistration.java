@@ -1,112 +1,151 @@
-
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import javax.swing.JCheckBox;
 
-
 public class GymMembershipRegistration extends javax.swing.JFrame {
-    
-    public double membershipAmount = 0;
-    public double facilityAmount =0;
+        public double membershipAmount = 0;
+    public double facilityAmount = 0;
     public double groupClasses = 0;
-    
-    
-    public double MembershipPlan(){
-        
-        int selectedIndex = 0;
-        String plan = "";
-        selectedIndex = this.jMembershiplan.getSelectedIndex();
-        plan = this.jMembershiplan.getItemAt(selectedIndex);
-        double amount = 0;
-        
-        if (plan.equalsIgnoreCase("Basic plan")) {
-            
-            amount = 250;
-        }
-        else if (plan.equalsIgnoreCase("Standard plan")) {
-            
-            amount = 400;
-        }
-        else if (plan.equalsIgnoreCase("Premium plan")) {
-            
-            amount = 600;
-            
-        }      
-       
-        return amount;
-    }
-    
-    public double AddOnFacilities(JCheckBox currentCheckBox){
-        
-       boolean checked = currentCheckBox.isSelected();
-       double price = 0;
-       double facilities = 0;
-       
-        if (currentCheckBox == this.jcbSauna) {
-            price = 50;
-            }
-        else if (currentCheckBox == this.jcbPool) {
-            price = 70;
-            }
-        else if (currentCheckBox == this.jcbLocker) {
-            price = 30;   
-            }
-        else{
-            price = 0;
-            }
-        if (checked) {  
-            facilities += price;
-        }
-        else{
-            facilities -= price;
-            
-        }
-  
-        return facilities;
-    }
-    
-        public double GroupClasses(JCheckBox currentCheckBox){
-        
-       boolean checked = currentCheckBox.isSelected();
-       double price = 0;
-       double groupClass = 0;
-       
-        if (currentCheckBox == this.jcbCrossFit) {
-            price = 120;
-            }
-        else if (currentCheckBox == this.jcbYoga) {
-            price = 100;
-            }
-        else if (currentCheckBox == this.jcbZumba) {
-            price = 90;   
-            }
-        else{
-            price = 0;
-            }
-        if (checked) {  
-            groupClass += price;
-        }
-        else{
-            groupClass -= price;
-            
-        }
-  
-        return groupClass;
-    }
-    
-    
+    private double personalTrainerCost = 0.0;
+    private double discountPercentage = 0.0;
+    private double membershipTotal = 0.0;
+
+    private javax.swing.ButtonGroup personalTrainerGroup;
+    private javax.swing.ButtonGroup paymentFrequencyGroup;
+
     public GymMembershipRegistration() {
         initComponents();
-                
+        setupButtonGroups();
+
         this.jMembershiplan.addItem("Please select your membership plan");
-        
         this.jMembershiplan.addItem("Basic plan");
         this.jMembershiplan.addItem("Standard plan");
         this.jMembershiplan.addItem("Premium plan");
-        
-        this.jcbSauna.isSelected();
 
         getContentPane().setBackground(Color.PINK);
     }
+
+        public double MembershipPlan() {
+        int selectedIndex = this.jMembershiplan.getSelectedIndex();
+        String plan = this.jMembershiplan.getItemAt(selectedIndex);
+        double amount = 0;
+
+        if (plan.equalsIgnoreCase("Basic plan")) {
+            amount = 250;
+        } else if (plan.equalsIgnoreCase("Standard plan")) {
+            amount = 400;
+        } else if (plan.equalsIgnoreCase("Premium plan")) {
+            amount = 600;
+        }
+
+        return amount;
+    }
+
+    private double calculateFacilityAmount() {
+        double total = 0;
+        if (jcbSauna.isSelected()) total += 50;
+        if (jcbPool.isSelected()) total += 70;
+        if (jcbLocker.isSelected()) total += 30;
+        return total;
+    }
+
+    private double calculateGroupClassesAmount() {
+        double total = 0;
+        if (jcbCrossFit.isSelected()) total += 120;
+        if (jcbYoga.isSelected()) total += 100;
+        if (jcbZumba.isSelected()) total += 90;
+        return total;
+    }
+    
+    private double addPersonalTrainer() {
+        double total = 0;
+        if (jrbtnDaily.isSelected()) total += 400;
+        if (jrbtnWeek.isSelected()) total += 150;
+        return total;
+    }
+    
+    public double addDiscount() {
+        double total = 0;
+        if (radBtnPayMonthly.isSelected()) total = 0;
+        if (radBtnPayQuaterly.isSelected()) total = 0.05;
+        return total;
+    }
+
+    private void updateSlipTextArea() {
+        StringBuilder slip = new StringBuilder();
+
+        slip.append("======= GYM MEMBERSHIP SLIP =======\n");
+
+        String plan = jMembershiplan.getSelectedItem().toString();
+        slip.append("Plan: ").append(plan).append("\n");
+
+        slip.append("Add-on Facilities:\n");
+        if (jcbSauna.isSelected()) slip.append(" - Sauna (R50)\n");
+        if (jcbPool.isSelected()) slip.append(" - Pool (R70)\n");
+        if (jcbLocker.isSelected()) slip.append(" - Locker (R30)\n");
+
+        slip.append("Group Classes:\n");
+        if (jcbCrossFit.isSelected()) slip.append(" - CrossFit (R120)\n");
+        if (jcbYoga.isSelected()) slip.append(" - Yoga (R100)\n");
+        if (jcbZumba.isSelected()) slip.append(" - Zumba (R90)\n");
+
+        slip.append("Trainer Option:\n");
+        if (jrbtnNo.isSelected()) slip.append(" - None (R0)\n");
+        else if (jrbtnDaily.isSelected()) slip.append(" - Daily (R400)\n");
+        else if (jrbtnWeek.isSelected()) slip.append(" - Once a Week (R150)\n");
+
+        slip.append("Payment Frequency: ");
+        if (radBtnPayMonthly.isSelected()) slip.append("Monthly (No Discount)\n");
+        else if (radBtnPayQuaterly.isSelected()) slip.append("Quarterly (5% Discount)\n");
+
+        if (jDateChooser1.getDate() != null) {
+            String date = new SimpleDateFormat("dd MMM yyyy").format(jDateChooser1.getDate());
+            slip.append("Start Date: ").append(date).append("\n");
+        }
+
+        slip.append("-----------------------------------\n");
+        slip.append("Total Amount: ").append(membershipTotal).append("\n");
+        slip.append("===================================");
+
+        costBreakDown.setText(slip.toString());
+    }
+
+    
+
+    private void updateTotalAmount() {
+        membershipAmount = MembershipPlan();
+        facilityAmount = calculateFacilityAmount();
+        groupClasses = calculateGroupClassesAmount();
+        personalTrainerCost = addPersonalTrainer();
+        discountPercentage = addDiscount();
+        updateSlipTextArea();
+
+        membershipTotal = membershipAmount + facilityAmount + groupClasses + personalTrainerCost;
+
+        if (discountPercentage > 0) {
+            membershipTotal -= (membershipTotal * discountPercentage);
+        }
+
+        jTxtTotalAmount.setText(String.format("R%.2f", membershipTotal));
+    }
+
+    
+    private void setupButtonGroups() {
+        personalTrainerGroup = new javax.swing.ButtonGroup();
+        paymentFrequencyGroup = new javax.swing.ButtonGroup();
+
+        personalTrainerGroup.add(jrbtnNo);
+        personalTrainerGroup.add(jrbtnDaily);
+        personalTrainerGroup.add(jrbtnWeek);
+
+        paymentFrequencyGroup.add(radBtnPayMonthly);
+        paymentFrequencyGroup.add(radBtnPayQuaterly);
+    }
+    
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> new GymMembershipRegistration().setVisible(true));
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,11 +181,11 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
         jrbtnWeek = new javax.swing.JRadioButton();
         jrbtnDaily = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
-        jrbtnMonthly = new javax.swing.JRadioButton();
-        jrbtnQuarterly = new javax.swing.JRadioButton();
+        radBtnPayMonthly = new javax.swing.JRadioButton();
+        radBtnPayQuaterly = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        textArea2 = new java.awt.TextArea();
+        costBreakDown = new java.awt.TextArea();
         jLabel13 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
@@ -165,12 +204,8 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
                 jMembershiplanItemStateChanged(evt);
             }
         });
-        jMembershiplan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMembershiplanActionPerformed(evt);
-            }
-        });
 
+        jTxtTotalAmount.setEditable(false);
         jTxtTotalAmount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTxtTotalAmount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +213,7 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             }
         });
 
+        jTxtMembership.setEditable(false);
         jTxtMembership.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtMembershipActionPerformed(evt);
@@ -188,17 +224,18 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 0, 153));
         jLabel1.setText("GYM MEMBERSHIP REGISTRATION");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Select Membership Plan");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Amount");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Membership Start Date");
 
-        jbtnSubmit.setBackground(new java.awt.Color(153, 0, 153));
-        jbtnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnSubmit.setBackground(new java.awt.Color(204, 102, 255));
+        jbtnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbtnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         jbtnSubmit.setText("Submit");
         jbtnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,12 +243,14 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Total Amount");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Group Classes");
 
+        jcbYoga.setBackground(new java.awt.Color(245, 192, 192));
+        jcbYoga.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbYoga.setText("Yoga- R100");
         jcbYoga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,10 +258,26 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             }
         });
 
+        jcbZumba.setBackground(new java.awt.Color(245, 192, 192));
+        jcbZumba.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbZumba.setText("Zumba-R90");
+        jcbZumba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbZumbaActionPerformed(evt);
+            }
+        });
 
+        jcbCrossFit.setBackground(new java.awt.Color(245, 192, 192));
+        jcbCrossFit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbCrossFit.setText("CrossFit - R120");
+        jcbCrossFit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbCrossFitActionPerformed(evt);
+            }
+        });
 
+        jcbSauna.setBackground(new java.awt.Color(245, 192, 192));
+        jcbSauna.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbSauna.setText("Sauna -R50");
         jcbSauna.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -235,6 +290,8 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             }
         });
 
+        jcbPool.setBackground(new java.awt.Color(245, 192, 192));
+        jcbPool.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbPool.setText("Pool -R70");
         jcbPool.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +299,8 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             }
         });
 
+        jcbLocker.setBackground(new java.awt.Color(245, 192, 192));
+        jcbLocker.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jcbLocker.setText("Locker-R30");
         jcbLocker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,6 +314,8 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Personal Trainer");
 
+        jrbtnNo.setBackground(new java.awt.Color(245, 192, 192));
+        jrbtnNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jrbtnNo.setText("No- R0");
         jrbtnNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +323,8 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             }
         });
 
+        jrbtnWeek.setBackground(new java.awt.Color(245, 192, 192));
+        jrbtnWeek.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jrbtnWeek.setText("Once a Week - R150");
         jrbtnWeek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,23 +332,47 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             }
         });
 
+        jrbtnDaily.setBackground(new java.awt.Color(245, 192, 192));
+        jrbtnDaily.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jrbtnDaily.setText("Daily - R400");
+        jrbtnDaily.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbtnDailyActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Payment Frequency ");
 
-        jrbtnMonthly.setText("Monthly - No Discount");
-        jrbtnMonthly.addActionListener(new java.awt.event.ActionListener() {
+        radBtnPayMonthly.setBackground(new java.awt.Color(245, 192, 192));
+        radBtnPayMonthly.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        radBtnPayMonthly.setText("Monthly - No Discount");
+        radBtnPayMonthly.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbtnMonthlyActionPerformed(evt);
+                radBtnPayMonthlyActionPerformed(evt);
             }
         });
 
-        jrbtnQuarterly.setText("Quarterly - 5% Discount");
+        radBtnPayQuaterly.setBackground(new java.awt.Color(245, 192, 192));
+        radBtnPayQuaterly.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        radBtnPayQuaterly.setText("Quarterly - 5% Discount");
+        radBtnPayQuaterly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radBtnPayQuaterlyActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel12.setText("Cost Breakdown");
+
+        costBreakDown.setEditable(false);
+        costBreakDown.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                costBreakDownPropertyChange(evt);
+            }
+        });
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo'ss.png"))); // NOI18N
         jLabel13.setText("jLabel13");
@@ -310,48 +397,47 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jrbtnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jrbtnDaily)
-                                            .addComponent(jrbtnWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jrbtnWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(80, 80, 80)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jcbYoga, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jcbZumba)
-                                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jrbtnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jrbtnQuarterly, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jcbCrossFit))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(204, 204, 204)
-                                                        .addComponent(jLabel12))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(143, 143, 143)
-                                                        .addComponent(textArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jcbYoga, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jcbZumba)
+                                            .addComponent(jcbCrossFit)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jMembershiplan, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jTxtMembership, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(35, 35, 35)
-                                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(79, 79, 79)
+                                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(radBtnPayMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(radBtnPayQuaterly, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(costBreakDown, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(45, 45, 45))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(77, 77, 77)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jTxtTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                                             .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGap(783, 783, 783)
+                                .addGap(739, 739, 739)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1232, 1232, 1232)
+                                .addGap(1355, 1355, 1355)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(825, 825, 825)
+                        .addGap(937, 937, 937)
+                        .addComponent(jLabel12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(934, 934, 934)
                         .addComponent(jbtnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(1051, Short.MAX_VALUE))
         );
@@ -392,17 +478,13 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbZumba)
-                            .addComponent(jcbLocker))
-                        .addGap(28, 28, 28))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbZumba)
+                    .addComponent(jcbLocker))
+                .addGap(2, 2, 2)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,11 +493,11 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jrbtnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jrbtnMonthly))
+                            .addComponent(radBtnPayMonthly))
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jrbtnDaily)
-                            .addComponent(jrbtnQuarterly))
+                            .addComponent(radBtnPayQuaterly))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -431,9 +513,9 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
                                 .addComponent(jTxtTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(1335, 1335, 1335))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(jbtnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(costBreakDown, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -441,33 +523,30 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbYogaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbYogaActionPerformed
-        groupClasses += GroupClasses(this.jcbYoga);
-        
+        updateTotalAmount();
     }//GEN-LAST:event_jcbYogaActionPerformed
 
     private void jcbSaunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSaunaActionPerformed
-        // TODO add your handling code here:
-        facilityAmount += AddOnFacilities(this.jcbSauna);
-        
-                
+        updateTotalAmount();          
     }//GEN-LAST:event_jcbSaunaActionPerformed
 
     private void jrbtnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtnNoActionPerformed
-        // TODO add your handling code here:
+        updateTotalAmount();
     }//GEN-LAST:event_jrbtnNoActionPerformed
 
     private void jMembershiplanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jMembershiplanItemStateChanged
-        if(jMembershiplan.getSelectedItem().equals("Basic plan")){
+        if (jMembershiplan.getSelectedItem().equals("Basic plan")) {
             this.jTxtMembership.setText("R250/month");
         }
-        
-        if(jMembershiplan.getSelectedItem().equals("Standard plan")){
+
+        if (jMembershiplan.getSelectedItem().equals("Standard plan")) {
             this.jTxtMembership.setText("R400/month");
         }
-        if(jMembershiplan.getSelectedItem().equals("Premium plan")){
+        if (jMembershiplan.getSelectedItem().equals("Premium plan")) {
             this.jTxtMembership.setText("R600/month");
         }
         
+        updateTotalAmount();
     }//GEN-LAST:event_jMembershiplanItemStateChanged
 
     private void jTxtMembershipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtMembershipActionPerformed
@@ -487,68 +566,47 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtTotalAmountActionPerformed
 
     private void jrbtnWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtnWeekActionPerformed
-        // TODO add your handling code here:
+        updateTotalAmount();
     }//GEN-LAST:event_jrbtnWeekActionPerformed
 
-    private void jrbtnMonthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtnMonthlyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbtnMonthlyActionPerformed
+    private void radBtnPayMonthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radBtnPayMonthlyActionPerformed
+        updateTotalAmount();
+    }//GEN-LAST:event_radBtnPayMonthlyActionPerformed
 
     private void jcbPoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPoolActionPerformed
-        // TODO add your handling code here:
-         facilityAmount += AddOnFacilities(this.jcbPool);
-         
+        updateTotalAmount();
     }//GEN-LAST:event_jcbPoolActionPerformed
 
     private void jMembershiplanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMembershiplanActionPerformed
-        // TODO add your handling code here:
-        this.membershipAmount = MembershipPlan();
+        updateTotalAmount();
     }//GEN-LAST:event_jMembershiplanActionPerformed
 
     private void jcbLockerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLockerActionPerformed
-        // TODO add your handling code here:
-        facilityAmount += AddOnFacilities(this.jcbLocker);
-
+        updateTotalAmount();
     }//GEN-LAST:event_jcbLockerActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        
-        
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GymMembershipRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GymMembershipRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GymMembershipRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GymMembershipRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jcbCrossFitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCrossFitActionPerformed
+        updateTotalAmount();
+    }//GEN-LAST:event_jcbCrossFitActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GymMembershipRegistration().setVisible(true);
-            }
-        });
-    }
+    private void jcbZumbaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbZumbaActionPerformed
+        updateTotalAmount();
+    }//GEN-LAST:event_jcbZumbaActionPerformed
+
+    private void jrbtnDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtnDailyActionPerformed
+        updateTotalAmount();  
+    }//GEN-LAST:event_jrbtnDailyActionPerformed
+
+    private void radBtnPayQuaterlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radBtnPayQuaterlyActionPerformed
+        updateTotalAmount();
+    }//GEN-LAST:event_radBtnPayQuaterlyActionPerformed
+
+    private void costBreakDownPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_costBreakDownPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_costBreakDownPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.TextArea costBreakDown;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -576,10 +634,9 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
     private javax.swing.JCheckBox jcbYoga;
     private javax.swing.JCheckBox jcbZumba;
     private javax.swing.JRadioButton jrbtnDaily;
-    private javax.swing.JRadioButton jrbtnMonthly;
     private javax.swing.JRadioButton jrbtnNo;
-    private javax.swing.JRadioButton jrbtnQuarterly;
     private javax.swing.JRadioButton jrbtnWeek;
-    private java.awt.TextArea textArea2;
+    private javax.swing.JRadioButton radBtnPayMonthly;
+    private javax.swing.JRadioButton radBtnPayQuaterly;
     // End of variables declaration//GEN-END:variables
 }

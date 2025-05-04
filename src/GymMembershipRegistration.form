@@ -59,40 +59,33 @@
                                           <Component id="jLabel7" min="-2" pref="176" max="-2" attributes="0"/>
                                           <Component id="jrbtnNo" min="-2" pref="203" max="-2" attributes="0"/>
                                           <Component id="jrbtnDaily" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jrbtnWeek" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                           <Component id="jLabel5" min="-2" pref="183" max="-2" attributes="0"/>
                                           <Component id="jLabel4" min="-2" pref="261" max="-2" attributes="0"/>
+                                          <Component id="jrbtnWeek" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jcbYoga" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
-                                                  <Component id="jcbZumba" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel10" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
-                                                  <Component id="jrbtnMonthly" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                                  <Component id="jrbtnQuarterly" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                                  <Component id="jcbCrossFit" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
-                                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                                                      <Component id="textArea2" min="-2" pref="243" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jcbYoga" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
+                                          <Component id="jcbZumba" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jcbCrossFit" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jMembershiplan" alignment="0" min="-2" pref="305" max="-2" attributes="0"/>
                                                   <Component id="jTxtMembership" alignment="0" min="-2" pref="305" max="-2" attributes="0"/>
                                                   <Component id="jLabel6" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                                               <Component id="jLabel13" min="-2" pref="388" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel10" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+                                                  <Component id="radBtnPayMonthly" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                                  <Component id="radBtnPayQuaterly" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="costBreakDown" min="-2" pref="272" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -105,19 +98,23 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="783" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="739" max="-2" attributes="0"/>
                               <Component id="jLabel11" min="-2" pref="212" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" min="-2" pref="268" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="1232" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="1355" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" pref="197" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel1" alignment="0" min="-2" pref="664" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="815" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="937" max="-2" attributes="0"/>
+                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="934" max="-2" attributes="0"/>
                       <Component id="jbtnSubmit" min="-2" pref="160" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -173,21 +170,14 @@
                       <Component id="jLabel13" min="-2" pref="233" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jcbZumba" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcbLocker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jcbZumba" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbLocker" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -197,12 +187,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jrbtnNo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jrbtnMonthly" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="radBtnPayMonthly" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jrbtnDaily" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jrbtnQuarterly" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="radBtnPayQuaterly" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -220,15 +210,15 @@
                               <Component id="jTxtTotalAmount" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1335" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="textArea2" min="-2" pref="291" max="-2" attributes="0"/>
+                      <Component id="costBreakDown" min="-2" pref="291" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jbtnSubmit" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="jbtnSubmit" min="-2" pref="51" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="1220" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -249,6 +239,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtTotalAmount">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
         </Property>
@@ -258,6 +249,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtMembership">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtMembershipActionPerformed"/>
       </Events>
@@ -276,7 +270,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
+          <Font name="Segoe UI" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Select Membership Plan"/>
       </Properties>
@@ -284,7 +278,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
+          <Font name="Segoe UI" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Amount"/>
       </Properties>
@@ -292,7 +286,7 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
+          <Font name="Segoe UI" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Membership Start Date"/>
       </Properties>
@@ -300,10 +294,13 @@
     <Component class="javax.swing.JButton" name="jbtnSubmit">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="0" red="99" type="rgb"/>
+          <Color blue="ff" green="66" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
+          <Font name="Segoe UI" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
@@ -316,7 +313,7 @@
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
+          <Font name="Segoe UI" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Total Amount"/>
       </Properties>
@@ -331,6 +328,12 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbYoga">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Yoga- R100"/>
       </Properties>
       <Events>
@@ -339,16 +342,40 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbZumba">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Zumba-R90"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbZumbaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbCrossFit">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="CrossFit - R120"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbCrossFitActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbSauna">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Sauna -R50"/>
       </Properties>
       <Events>
@@ -358,6 +385,12 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbPool">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pool -R70"/>
       </Properties>
       <Events>
@@ -366,8 +399,17 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbLocker">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Locker-R30"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbLockerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -387,6 +429,12 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbtnNo">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="No- R0"/>
       </Properties>
       <Events>
@@ -395,6 +443,12 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbtnWeek">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Once a Week - R150"/>
       </Properties>
       <Events>
@@ -403,8 +457,17 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbtnDaily">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Daily - R400"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbtnDailyActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
@@ -414,18 +477,33 @@
         <Property name="text" type="java.lang.String" value="Payment Frequency "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jrbtnMonthly">
+    <Component class="javax.swing.JRadioButton" name="radBtnPayMonthly">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Monthly - No Discount"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbtnMonthlyActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radBtnPayMonthlyActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jrbtnQuarterly">
+    <Component class="javax.swing.JRadioButton" name="radBtnPayQuaterly">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" red="f5" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Quarterly - 5% Discount"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radBtnPayQuaterlyActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
@@ -436,10 +514,19 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI Semibold" size="18" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cost Breakdown"/>
       </Properties>
     </Component>
-    <Component class="java.awt.TextArea" name="textArea2">
+    <Component class="java.awt.TextArea" name="costBreakDown">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="costBreakDownPropertyChange"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
