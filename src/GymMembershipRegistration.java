@@ -141,12 +141,10 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
         discountPercentage = addDiscount();
         membershipTotal = membershipAmount + facilityAmount + groupClasses + personalTrainerCost;
         
-        updateSlipTextArea();
-
         if (discountPercentage > 0) {
             membershipTotal -= (membershipTotal * discountPercentage);
         }
-
+        updateSlipTextArea();
         jTxtTotalAmount.setText(String.format("R%.2f", membershipTotal));
     }
 
