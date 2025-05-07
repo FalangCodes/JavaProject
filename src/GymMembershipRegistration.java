@@ -1,14 +1,16 @@
 import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 
 public class GymMembershipRegistration extends javax.swing.JFrame {
-        public double membershipAmount = 0;
-    public double facilityAmount = 0;
-    public double groupClasses = 0;
-    private double personalTrainerCost = 0.0;
-    private double discountPercentage = 0.0;
-    private double membershipTotal = 0.0;
+    public static double membershipAmount = 0;
+    public static double facilityAmount = 0;
+    public static double groupClasses = 0;
+    private static double personalTrainerCost = 0.0;
+    private static double discountPercentage = 0.0;
+    private static double membershipTotal = 0.0;
 
     private javax.swing.ButtonGroup personalTrainerGroup;
     private javax.swing.ButtonGroup paymentFrequencyGroup;
@@ -103,14 +105,33 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
             slip.append("Start Date: ").append(date).append("\n");
         }
 
-        slip.append("-----------------------------------\n");
+        slip.append("\n\n-----------------------------------\n");
         slip.append("Total Amount: ").append(membershipTotal).append("\n");
         slip.append("===================================");
 
         costBreakDown.setText(slip.toString());
     }
 
-    
+    private void clearAllFields() {
+        jMembershiplan.setSelectedIndex(0);
+
+        jcbSauna.setSelected(false);
+        jcbPool.setSelected(false);
+        jcbLocker.setSelected(false);
+
+        jcbCrossFit.setSelected(false);
+        jcbYoga.setSelected(false);
+        jcbZumba.setSelected(false);
+
+        personalTrainerGroup.clearSelection();
+        paymentFrequencyGroup.clearSelection();
+
+        jDateChooser1.setDate(null);
+        jTxtTotalAmount.setText("");
+        costBreakDown.setText("");
+        jTxtMembership.setText("");
+    }
+
 
     private void updateTotalAmount() {
         membershipAmount = MembershipPlan();
@@ -118,9 +139,9 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
         groupClasses = calculateGroupClassesAmount();
         personalTrainerCost = addPersonalTrainer();
         discountPercentage = addDiscount();
-        updateSlipTextArea();
-
         membershipTotal = membershipAmount + facilityAmount + groupClasses + personalTrainerCost;
+        
+        updateSlipTextArea();
 
         if (discountPercentage > 0) {
             membershipTotal -= (membershipTotal * discountPercentage);
@@ -554,7 +575,48 @@ public class GymMembershipRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtMembershipActionPerformed
 
     private void jbtnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSubmitActionPerformed
-        // TODO add your handling code here:
+        // 1. Validation checks
+        if (!radBtnPayMonthly.isSelected() && !radBtnPayQuaterly.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Please select a payment frequency.", "Missing Selection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!jrbtnNo.isSelected() && !jrbtnDaily.isSelected() && !jrbtnWeek.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Please select a personal trainer option.", "Missing Selection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (jMembershiplan.getSelectedIndex() == 0) { // Assuming index 0 is "Please select..."
+            JOptionPane.showMessageDialog(this, "Please select a membership plan.", "Missing Selection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Calculate the total before confirmation
+        updateTotalAmount(); // This should set `membershipTotal` and update UI
+        String totalAmountText = String.format("Total amount to be paid: R%.2f", membershipTotal);
+        
+        Date selectedDate = jDateChooser1.getDate();
+        Date today = new Date();
+
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Please select a start date.", "Missing Date", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (selectedDate.before(today)) {
+            JOptionPane.showMessageDialog(this, "Start date cannot be in the past.", "Invalid Date", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 3. Confirmation dialog
+        int confirm = JOptionPane.showConfirmDialog(this, totalAmountText + "\nDo you want to confirm the order?", "Confirm Order", JOptionPane.OK_CANCEL_OPTION);
+
+        if (confirm == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(this, "Your order has been successfully submitted!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            clearAllFields();
+        } else {
+            JOptionPane.showMessageDialog(this, "Order cancelled.", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jbtnSubmitActionPerformed
 
     private void jcbSaunaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSaunaItemStateChanged
